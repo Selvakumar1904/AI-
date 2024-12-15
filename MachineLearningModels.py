@@ -31,8 +31,8 @@ def add_all_performances(name, precision, recall, f1_score, AUC):
     global all_performances
     models = pd.DataFrame([[name, precision, recall, f1_score, AUC]],
                          columns=["model_name","precision", "recall", "f1_score", "AUC"])
-    all_performances = all_performances.append(models, ignore_index=True)
-    all_performances= all_performances.drop_duplicates()
+    all_performances = pd.concat([all_performances, models], ignore_index=True)
+    all_performances = all_performances.drop_duplicates()
       
     
 def calculate_scores(X_train, X_test, y_train, y_test, y_pred, name, model):
